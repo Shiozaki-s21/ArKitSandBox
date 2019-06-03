@@ -9,7 +9,6 @@
 import UIKit
 import ARKit
 
-
 class ViewController: UIViewController {
   @IBOutlet var sceneView: ARSCNView!
   @IBOutlet weak var hitLabel: UILabel! {
@@ -18,6 +17,31 @@ class ViewController: UIViewController {
     }
   }
   
+  lazy var kightNode: SCNNode = {
+    // Create a new SCNScene as a kight
+    let kight = SCNScene(named: "art.scnassets/kight.scn")!
+    
+    // Create node for kight
+    let kightNode: SCNNode = SCNNode()
+    var nodeArray = kight.rootNode.childNodes
+    kightNode.name = "kight"
+    
+    for childNode in nodeArray {
+      kightNode.addChildNode(childNode as SCNNode)
+    }
+    
+    // to add BodyShape
+    let shape = SCNPhysicsShape(node: kightNode, options: nil)
+    // to add hitting
+    // .dynamic -> it's movable after hitting
+    // .static -> no hit
+    // .kinematic -> it's not movable after hitting
+    kightNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: shape)
+    kightNode.physicsBody?.isAffectedByGravity = false
+    kightNode.position = SCNVector3Make(0, 0, 0)
+    return kightNode
+  }()
+  
   let defaultConfiguration: ARWorldTrackingConfiguration = {
     let configuration = ARWorldTrackingConfiguration()
     configuration.planeDetection = .horizontal
@@ -25,21 +49,21 @@ class ViewController: UIViewController {
     return configuration
   }()
   
-  lazy var boxNode: SCNNode = {
-    let cylinder = SCNCylinder(radius: 0.1, height: 0.05)
-    let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
-    box.firstMaterial?.diffuse.contents = UIColor.red
-    let node = SCNNode(geometry: box)
-    node.name = "box"
-    node.position = SCNVector3Make(0, 0, -1.5)
-    
-    // add PhysicsShape
-    let shape = SCNPhysicsShape(geometry: box, options: nil)
-    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: shape)
-    node.physicsBody?.isAffectedByGravity = false
-    
-    return node
-  }()
+  //  lazy var boxNode: SCNNode = {
+  //    let cylinder = SCNCylinder(radius: 0.1, height: 0.05)
+  //    let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+  //    box.firstMaterial?.diffuse.contents = UIColor.red
+  //    let node = SCNNode(geometry: box)
+  //    node.name = "box"
+  //    node.position = SCNVector3Make(0, 0, -1.5)
+  //
+  //    // add PhysicsShape
+  //    let shape = SCNPhysicsShape(geometry: box, options: nil)
+  //    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: shape)
+  //    node.physicsBody?.isAffectedByGravity = false
+  //
+  //    return node
+  //  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,7 +72,9 @@ class ViewController: UIViewController {
     sceneView.autoenablesDefaultLighting = true
     sceneView.scene.physicsWorld.contactDelegate = self
     
-    sceneView.scene.rootNode.addChildNode(boxNode)
+    // add new model
+    // Set the scene to the view
+    sceneView.scene.rootNode.addChildNode(kightNode)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +127,8 @@ extension ViewController: SCNPhysicsContactDelegate {
     let nodeA = contact.nodeA
     let nodeB = contact.nodeB
     
-    if (nodeA.name == "box" && nodeB.name == "ball")
-      || (nodeB.name == "box" && nodeA.name == "ball"){
+    if (nodeA.name == "kight" && nodeB.name == "ball")
+      || (nodeB.name == "kight" && nodeA.name == "ball"){
       
       DispatchQueue.main.async {
         self.hitLabel.text = "HIT!!"
