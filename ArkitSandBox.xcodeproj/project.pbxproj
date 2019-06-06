@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C39D84322A709DB0074BA59 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C39D84222A709DB0074BA59 /* Plane.swift */; };
 		0C57901122975BC700E39904 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C57901022975BC700E39904 /* AppDelegate.swift */; };
 		0C57901322975BC700E39904 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C57901222975BC700E39904 /* art.scnassets */; };
 		0C57901522975BC700E39904 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C57901422975BC700E39904 /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C39D84222A709DB0074BA59 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		0C57900D22975BC600E39904 /* ArkitSandBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArkitSandBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C57901022975BC700E39904 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C57901222975BC700E39904 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				0C57901222975BC700E39904 /* art.scnassets */,
 				0C57901422975BC700E39904 /* ViewController.swift */,
 				0C57901622975BC700E39904 /* Main.storyboard */,
+				0C39D84222A709DB0074BA59 /* Plane.swift */,
 				0C57901922975BC900E39904 /* Assets.xcassets */,
 				0C57901B22975BC900E39904 /* LaunchScreen.storyboard */,
 				0C57901E22975BC900E39904 /* Info.plist */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C57901522975BC700E39904 /* ViewController.swift in Sources */,
+				0C39D84322A709DB0074BA59 /* Plane.swift in Sources */,
 				0C57901122975BC700E39904 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
