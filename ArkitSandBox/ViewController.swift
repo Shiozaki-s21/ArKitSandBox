@@ -16,33 +16,7 @@ class ViewController: UIViewController {
       hitLabel.isHidden = true
     }
   }
-  
-  func loadNode() -> SCNNode {
-    // Create a new SCNScene as a kight
-    let kight = SCNScene(named: "art.scnassets/kight.scn")!
-    
-    // Create node for kight
-    let kightNode: SCNNode = SCNNode()
-    var nodeArray = kight.rootNode.childNodes
-    kightNode.name = "kight"
-    
-    for childNode in nodeArray {
-      kightNode.addChildNode(childNode as SCNNode)
-    }
-    
-    // to add BodyShape
-    let shape = SCNPhysicsShape(node: kightNode, options: nil)
-    // to add hitting
-    // .dynamic -> it's movable after hitting
-    // .static -> no hit
-    // .kinematic -> it's not movable after hitting
-    kightNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: shape)
-    kightNode.physicsBody?.isAffectedByGravity = false
-    kightNode.position = SCNVector3Make(0, 0, 0)
-    return kightNode
-  }
-  
-  
+
   lazy var kightNode: SCNNode = {
     // Create a new SCNScene as a kight
     let kight = SCNScene(named: "art.scnassets/kight.scn")!
@@ -51,7 +25,7 @@ class ViewController: UIViewController {
     let kightNode: SCNNode = SCNNode()
     var nodeArray = kight.rootNode.childNodes
     kightNode.name = "kight"
-    
+    kightNode.position = SCNVector3(0, 0, 0)
     for childNode in nodeArray {
       kightNode.addChildNode(childNode as SCNNode)
     }
@@ -97,7 +71,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
     // Set the view's delegate
-    sceneView.delegate = self
+//    sceneView.delegate = self
     
     sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     sceneView.autoenablesDefaultLighting = true
@@ -105,8 +79,8 @@ class ViewController: UIViewController {
     
     // add new model
     // Set the scene to the view
-     sceneView.scene = SCNScene()
-//    sceneView.scene.rootNode.addChildNode(kightNode)
+//     sceneView.scene = SCNScene()
+    sceneView.scene.rootNode.addChildNode(kightNode)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -126,10 +100,10 @@ class ViewController: UIViewController {
   
 //  override func viewWillDisappear(_ animated: Bool) {
 //    super.viewWillDisappear(animated)
-//    
+//
 //    sceneView.session.pause()
 //  }
-//  
+//
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     let ball = SCNSphere(radius: 0.1)
     ball.firstMaterial?.diffuse.contents = UIColor.blue
@@ -160,6 +134,18 @@ class ViewController: UIViewController {
     }
     sceneView.scene.rootNode.addChildNode(node)
   }
+  
+  func startGame() {
+    // after tapped start button
+    
+    // start countdown
+    
+    // count time
+    
+    // before enemy shooting, player tapped
+    
+    // after enemy shootingm, player tapped or pla
+  }
 }
 
 extension ViewController: SCNPhysicsContactDelegate {
@@ -186,10 +172,16 @@ extension ViewController: SCNPhysicsContactDelegate {
   }
 }
 
-extension ViewController: ARSCNViewDelegate {
-  func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-    print("get call")
-    node.addChildNode(kightNode)
-//    sceneView.scene.rootNode.addChildNode(node)
-  }
-}
+//Mark:- position problem
+//extension ViewController: ARSCNViewDelegate {
+//  func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//    print(node.position)
+//
+//    node.addChildNode(kightNode)
+//  }
+//
+//  func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//    print(node.position)
+//  }
+//
+//}
